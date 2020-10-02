@@ -8,7 +8,7 @@ import Button from '../../components/Button/Button';
 import ModalExchange from '../../components/ModalExchange/ModalExchange';
 import * as Style from './style';
 
-@Consumer('gameStore')
+// @Consumer('gameStore')
 export default class Reward extends Component {
   static navigationOptions = ({ navigation }) => NavigationOptions(navigation, 'game.my_reward', 'mode2')
 

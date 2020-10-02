@@ -25,7 +25,7 @@ const Game = ({ navigation, context }) => {
   )
   React.useEffect(() => {
     const firstPlayInitial = async () => {
-      // const { loadGameList } = context.gameStore;
+      const { loadGameList } = context.gameStore;
 
       const [
         hasPlayed,
@@ -57,7 +57,7 @@ const Game = ({ navigation, context }) => {
   }
 
   const onCloseModalReward = () => {
-    // const { loadGameList } = context.gameStore;
+    const { loadGameList } = context.gameStore;
     loadGameList();
     setState({ ...state, modalRewardVisible: false });
   }
