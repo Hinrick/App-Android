@@ -56,12 +56,12 @@ global.URL = URL;
 global.URLSearchParams = URLSearchParams;
 
 const getLanguageCode = () => {
-  let systemLanguage = 'en';
-  if (Platform.OS === 'android') {
-    systemLanguage = NativeModules.I18nManager.localeIdentifier;
-  } else {
-    systemLanguage = NativeModules.SettingsManager.settings.AppleLocale;
-  }
+  let systemLanguage = 'zh';
+  // if (Platform.OS === 'android') {
+  //   systemLanguage = NativeModules.I18nManager.localeIdentifier;
+  // } else {
+  //   systemLanguage = NativeModules.SettingsManager.settings.AppleLocale;
+  // }
   const languageCode = systemLanguage.substring(0, 2);
   return languageCode;
 }
