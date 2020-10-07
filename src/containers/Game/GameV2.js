@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import LoadingIcon from '../../components/LoadingIcon/LoadingIcon';
 import { Consumer } from '../../store';
@@ -12,6 +12,22 @@ import gameServices from '../../api/gameServices';
 import avatarUser from '../../images/avatar/avatarUser.png';
 import * as Style from './style';
 import { useNavigation } from "@react-navigation/native";
+
+import Puzzle1Lock from '../../images/puzzle/locked/Puzzle1Lock.jpg';
+import Puzzle2Lock from '../../images/puzzle/locked/Puzzle2Lock.jpg';
+import Puzzle3Lock from '../../images/puzzle/locked/Puzzle3Lock.jpg';
+import Puzzle4Lock from '../../images/puzzle/locked/Puzzle4Lock.jpg';
+import Puzzle5Lock from '../../images/puzzle/locked/Puzzle5Lock.jpg';
+import Puzzle6Lock from '../../images/puzzle/locked/Puzzle6Lock.jpg';
+import Puzzle7Lock from '../../images/puzzle/locked/Puzzle7Lock.jpg';
+import Puzzle8Lock from '../../images/puzzle/locked/Puzzle8Lock.jpg';
+import Puzzle9Lock from '../../images/puzzle/locked/Puzzle9Lock.jpg';
+import Puzzle10Lock from '../../images/puzzle/locked/Puzzle10Lock.jpg';
+import Puzzle11Lock from '../../images/puzzle/locked/Puzzle11Lock.jpg';
+import Puzzle12Lock from '../../images/puzzle/locked/Puzzle12Lock.jpg';
+
+import inActiveIcon from '../../images/iconGiftActive.png';
+import activeIcon from '../../images/iconGiftActive.png';
 
 const Game = ({ navigation, context }) => {
 
@@ -71,13 +87,76 @@ const Game = ({ navigation, context }) => {
     isLoading
   } = state;
 
-  const { score, missionList, isLoaded, lastPassIndex } = context.gameStore;
 
+  // const { score, missionList, isLoaded, lastPassIndex } = context.gameStore;
+  const puzzleList =  [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      title: 'First Item',
+      img: Puzzle1Lock
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      title: 'Second Item',
+      img: Puzzle2Lock
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'Third Item',
+      img: Puzzle3Lock
+    },
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      title: 'First Item',
+      img: Puzzle4Lock
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      title: 'Second Item',
+      img: Puzzle5Lock
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'Third Item',
+      img: Puzzle6Lock
+    },
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      title: 'First Item',
+      img: Puzzle7Lock
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      title: 'Second Item',
+      img: Puzzle8Lock
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'Third Item',
+      img: Puzzle9Lock
+    },
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      title: 'First Item',
+      img: Puzzle10Lock
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      title: 'Second Item',
+      img: Puzzle11Lock
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'Third Item',
+      img: Puzzle12Lock
+    },
+  ];
+  
   return (
     <Style.ScrollContainer contentContainerStyle={{ flexGrow: 1 }}>
       <Style.GameContainer>
         {
-          isLoading
+          !isLoading
             ? (
               <LoadingIcon size="large" color="#ffffff" />
             )
@@ -86,21 +165,43 @@ const Game = ({ navigation, context }) => {
                 {/** 上方頭像、分數 */}
                 <Style.ProfileContainer>
                   <Style.UserIcon source={avatarUser} />
-                  <View style={{ justifyContent: 'space-around' }}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                     <Style.TotalText>{I18n.t('game.total_score')}</Style.TotalText>
-                    <Button disabled={!isLoaded} onClick={goReward} color="inverse"
-                            text={I18n.t('game.my_reward')} margin={[ 0, 0, 0, 0 ]} />
+                    <Style.ScoreText>{12}/12</Style.ScoreText>
                   </View>
-                  <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                    <Style.ScoreText>{score}</Style.ScoreText>
-                  </View>
+                  {/** 進度條 */}
+                  <Style.ProgressContainer>
+                    <Style.ProgressBar>
+                      <View style={{width:'50%', height: 4, backgroundColor:'#fff'}}></View>
+                      <View style={{width:'50%', height: 4, backgroundColor:'#ffcc00'}}></View>
+                    </Style.ProgressBar>
+                    <View style={{width:'10%'}}>
+                      <Style.ProgressGift source={inActiveIcon}/>
+                    </View>
+                    <Style.ProgressBar>
+                      <View style={{width:'50%', height: 4, backgroundColor:'#fff'}}></View>
+                      <View style={{width:'50%', height: 4, backgroundColor:'#ffcc00'}}></View>
+                    </Style.ProgressBar>
+                    <View style={{width:'10%'}}>
+                      <Style.ProgressGift source={inActiveIcon}/>
+                    </View>
+                  </Style.ProgressContainer>
                 </Style.ProfileContainer>
                 {/** 關卡 */}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Style.PuzzleContainer 
+                  data={puzzleList}
+                  renderItem={(props)=>{
+                    return <Style.PuzzleBlock onPress={()=>{alert("Test")}} ><Style.PuzzlePng source={props.item.img} resizeMode="cover"/></Style.PuzzleBlock>
+                  }}
+                  keyExtractor={item => item.id}
+                  numColumns={4}
+                />
+
+                {/* <View style={{  justifyContent: 'space-between' }}>
                   <Style.ProgressTitleText>{I18n.t('game.progress')}</Style.ProgressTitleText>
                   <Style.ProgressText>{missionList.filter(m => m.pass === 1).length}/{missionList.length}</Style.ProgressText>
-                </View>
-                {
+                </View> */}
+                {/* {
                   missionList.map((mission, mission_index) => (
                     <GameBlock
                       key={mission.uid}
@@ -110,8 +211,8 @@ const Game = ({ navigation, context }) => {
                       navigation={navigation}
                     />
                   ))
-                }
-                {
+                } */}
+                {/* {
                   isLoaded && (
                     <GameBlock
                       mode="reward"
@@ -121,7 +222,7 @@ const Game = ({ navigation, context }) => {
                       onOpenModalReward={onOpenModalReward}
                     />
                   )
-                }
+                } */}
               </View>
             )
         }

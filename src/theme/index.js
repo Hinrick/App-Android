@@ -1,5 +1,6 @@
 export const aquamarine = '#00687d';
 export const aquamarineTwo = '#002E50';
+export const mariGold = 'ffcc00';
 export const scheduleCardBackground = '#FFCC00';
 export const scheduleCardTypeColor = '#FFCC00';
 export const windowsBlue = '#FFCC00';

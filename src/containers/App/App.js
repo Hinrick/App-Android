@@ -29,7 +29,7 @@ import VolunteerDetail from '../VolunteerDetail/VolunteerDetail';
 import QRCode from '../QRCode/QRCode';
 import MySchedule from '../MySchedule/MySchedule';
 import QA from '../QA/QA';
-import Game from '../Game/Game';
+import Game from '../Game/GameV2';
 import GameDetail from '../GameDetail/GameDetail';
 import Reward from '../Reward/Reward';
 import More from '../More/More';
@@ -126,10 +126,7 @@ class App extends Component {
     let fcmToken = await AsyncStorage.getItem('fcmToken');
 
     if (!fcmToken) {
-      
       fcmToken = await messaging().getToken();
-
-      console.log("I am getting token", fcmToken)
       if (fcmToken) {
         await AsyncStorage.setItem('fcmToken', fcmToken);
       }
