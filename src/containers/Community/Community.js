@@ -20,9 +20,10 @@ const Community = ({ navigation }) => {
     community: [], // 主辦社群
     participant: [], // 協辦社群
     volunteer: [], // 志工
+    loading: true,
   })
 
-  const getData = async () => {
+  const getData = async () => { 
     const [
       { data: { community, participant } },
       { data: { volunteer } }
@@ -30,7 +31,7 @@ const Community = ({ navigation }) => {
       apiServices.get('/community'),
       apiServices.get('/volunteer')
     ]);
-    setState({ ...state, community, volunteer, participant });
+    setState({ ...state, loading: false, community, volunteer, participant });
   }
 
   React.useLayoutEffect(() => {
@@ -57,7 +58,7 @@ const Community = ({ navigation }) => {
     Linking.openURL('https://www.facebook.com/mopcon');
   }
 
-  const { community, volunteer, participant } = state;
+  const { community, volunteer, participant, loading } = state;
 
   const tabs = [
     { name: I18n.t('community.tab_community'), value: 'community' },
@@ -67,7 +68,7 @@ const Community = ({ navigation }) => {
   return (
     <Style.ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       {
-        Boolean(community.length)
+        Boolean(!loading)
           ? (
             <React.Fragment>
               <Style.Container>
