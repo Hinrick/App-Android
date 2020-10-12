@@ -22,7 +22,7 @@ const VolunteerDetail = ({ navigation, route }) => {
     fetchVolunteerDetail(url);
   })
 
-  const { id } = navigation.state.params;
+
   const lang = I18n.locale;
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -49,7 +49,7 @@ const VolunteerDetail = ({ navigation, route }) => {
 VolunteerDetail.navigationOptions = ({ navigation }) => NavigationOptions(navigation, 'community.volunteer_info', 'mode2')
 export default function (props) {
   const navigation = useNavigation();
-  const route = useRoute()
+  const route = useRoute();
   return <VolunteerDetail {...props} navigation={navigation} route={route} />
 }
 
